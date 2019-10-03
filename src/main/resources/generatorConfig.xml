@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--指定特定数据库的jdbc驱动jar包的位置-->
+    <!-- 已经在pom.xml 的plugin中单独依赖Mysql驱动包，则可以不配置此项-->
+    <!--<classPathEntry location="G:\\my_resources\\jar\\mysql-connector-java-5.1.6-bin.jar"/>-->
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!-- 配置pojo的序列化 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <commentGenerator>
+            <property name="suppressDate" value="true" />
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/check_car"
+                        userId="root" password="123456">
+            <!--设置可以获取tables remarks信息,解决不识别主键问题-->
+            <property name="useInformationSchema" value="true"/>
+        </jdbcConnection>
+        <!-- 类型转换 -->
+        <javaTypeResolver>
+            <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+        <!-- 生成模型的包名和位置 -->
+        <javaModelGenerator
+                targetPackage="com.example.practise.entity"
+                targetProject="D:\idea_workspace\practise\src\main\java">
+            <!--自动为每一个生成的类创建一个构造方法-->
+            <property name="constructorBased" value="true"/>
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!-- 生成映射文件的包名和位置 -->
+        <sqlMapGenerator
+                targetPackage="mapper"
+                targetProject="D:\idea_workspace\practise\src\main\resources">
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+
+        <!-- 生成的Mapper接口的路径 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.example.practise.dao"
+                             targetProject="D:\idea_workspace\practise\src\main\java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="rootClass" value="com.demo.mapper.common.BaseMapper"/>
+        </javaClientGenerator>
+
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名 -->
+        <table tableName="car_related_info" domainObjectName="CarRelatedInfo"/>
+    </context>
+
+</generatorConfiguration>

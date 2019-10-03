@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.practise.dao.CarRelatedInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.example.practise.entity.CarRelatedInfo" >
+    <constructor >
+      <idArg column="check_car_number" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="userid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="car_owner" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="vin_number" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="number" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="has_car_number_or" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="branch" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="employee_photo" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="employee_number" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="has_scratch_or" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="has_glass_or" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="has_add_device_or" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="has_not_repair_or" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="has_robbery_or" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="has_fire_self_or" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="has_water_or" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="startTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="channel" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="insurance_num" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="up_system" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="text1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="text2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="text3" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    check_car_number, userid, car_owner, vin_number, number, has_car_number_or, branch, 
+    employee_photo, employee_number, has_scratch_or, has_glass_or, has_add_device_or, 
+    has_not_repair_or, has_robbery_or, has_fire_self_or, has_water_or, startTime, channel, 
+    insurance_num, up_system, text1, text2, text3
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.practise.entity.CarRelatedInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from car_related_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from car_related_info
+    where check_car_number = #{checkCarNumber,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from car_related_info
+    where check_car_number = #{checkCarNumber,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.practise.entity.CarRelatedInfoExample" >
+    delete from car_related_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.practise.entity.CarRelatedInfo" >
+    insert into car_related_info (check_car_number, userid, car_owner, 
+      vin_number, number, has_car_number_or, 
+      branch, employee_photo, employee_number, 
+      has_scratch_or, has_glass_or, has_add_device_or, 
+      has_not_repair_or, has_robbery_or, has_fire_self_or, 
+      has_water_or, startTime, channel, 
+      insurance_num, up_system, text1, 
+      text2, text3)
+    values (#{checkCarNumber,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{carOwner,jdbcType=VARCHAR}, 
+      #{vinNumber,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}, #{hasCarNumberOr,jdbcType=INTEGER}, 
+      #{branch,jdbcType=VARCHAR}, #{employeePhoto,jdbcType=VARCHAR}, #{employeeNumber,jdbcType=VARCHAR}, 
+      #{hasScratchOr,jdbcType=INTEGER}, #{hasGlassOr,jdbcType=INTEGER}, #{hasAddDeviceOr,jdbcType=INTEGER}, 
+      #{hasNotRepairOr,jdbcType=INTEGER}, #{hasRobberyOr,jdbcType=INTEGER}, #{hasFireSelfOr,jdbcType=INTEGER}, 
+      #{hasWaterOr,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP}, #{channel,jdbcType=VARCHAR}, 
+      #{insuranceNum,jdbcType=VARCHAR}, #{upSystem,jdbcType=VARCHAR}, #{text1,jdbcType=VARCHAR}, 
+      #{text2,jdbcType=VARCHAR}, #{text3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.practise.entity.CarRelatedInfo" >
+    insert into car_related_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="checkCarNumber != null" >
+        check_car_number,
+      </if>
+      <if test="userid != null" >
+        userid,
+      </if>
+      <if test="carOwner != null" >
+        car_owner,
+      </if>
+      <if test="vinNumber != null" >
+        vin_number,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="hasCarNumberOr != null" >
+        has_car_number_or,
+      </if>
+      <if test="branch != null" >
+        branch,
+      </if>
+      <if test="employeePhoto != null" >
+        employee_photo,
+      </if>
+      <if test="employeeNumber != null" >
+        employee_number,
+      </if>
+      <if test="hasScratchOr != null" >
+        has_scratch_or,
+      </if>
+      <if test="hasGlassOr != null" >
+        has_glass_or,
+      </if>
+      <if test="hasAddDeviceOr != null" >
+        has_add_device_or,
+      </if>
+      <if test="hasNotRepairOr != null" >
+        has_not_repair_or,
+      </if>
+      <if test="hasRobberyOr != null" >
+        has_robbery_or,
+      </if>
+      <if test="hasFireSelfOr != null" >
+        has_fire_self_or,
+      </if>
+      <if test="hasWaterOr != null" >
+        has_water_or,
+      </if>
+      <if test="starttime != null" >
+        startTime,
+      </if>
+      <if test="channel != null" >
+        channel,
+      </if>
+      <if test="insuranceNum != null" >
+        insurance_num,
+      </if>
+      <if test="upSystem != null" >
+        up_system,
+      </if>
+      <if test="text1 != null" >
+        text1,
+      </if>
+      <if test="text2 != null" >
+        text2,
+      </if>
+      <if test="text3 != null" >
+        text3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="checkCarNumber != null" >
+        #{checkCarNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="carOwner != null" >
+        #{carOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="vinNumber != null" >
+        #{vinNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="hasCarNumberOr != null" >
+        #{hasCarNumberOr,jdbcType=INTEGER},
+      </if>
+      <if test="branch != null" >
+        #{branch,jdbcType=VARCHAR},
+      </if>
+      <if test="employeePhoto != null" >
+        #{employeePhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNumber != null" >
+        #{employeeNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="hasScratchOr != null" >
+        #{hasScratchOr,jdbcType=INTEGER},
+      </if>
+      <if test="hasGlassOr != null" >
+        #{hasGlassOr,jdbcType=INTEGER},
+      </if>
+      <if test="hasAddDeviceOr != null" >
+        #{hasAddDeviceOr,jdbcType=INTEGER},
+      </if>
+      <if test="hasNotRepairOr != null" >
+        #{hasNotRepairOr,jdbcType=INTEGER},
+      </if>
+      <if test="hasRobberyOr != null" >
+        #{hasRobberyOr,jdbcType=INTEGER},
+      </if>
+      <if test="hasFireSelfOr != null" >
+        #{hasFireSelfOr,jdbcType=INTEGER},
+      </if>
+      <if test="hasWaterOr != null" >
+        #{hasWaterOr,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channel != null" >
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceNum != null" >
+        #{insuranceNum,jdbcType=VARCHAR},
+      </if>
+      <if test="upSystem != null" >
+        #{upSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        #{text3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.practise.entity.CarRelatedInfoExample" resultType="java.lang.Integer" >
+    select count(*) from car_related_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update car_related_info
+    <set >
+      <if test="record.checkCarNumber != null" >
+        check_car_number = #{record.checkCarNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userid != null" >
+        userid = #{record.userid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carOwner != null" >
+        car_owner = #{record.carOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vinNumber != null" >
+        vin_number = #{record.vinNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hasCarNumberOr != null" >
+        has_car_number_or = #{record.hasCarNumberOr,jdbcType=INTEGER},
+      </if>
+      <if test="record.branch != null" >
+        branch = #{record.branch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeePhoto != null" >
+        employee_photo = #{record.employeePhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeNumber != null" >
+        employee_number = #{record.employeeNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hasScratchOr != null" >
+        has_scratch_or = #{record.hasScratchOr,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasGlassOr != null" >
+        has_glass_or = #{record.hasGlassOr,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasAddDeviceOr != null" >
+        has_add_device_or = #{record.hasAddDeviceOr,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasNotRepairOr != null" >
+        has_not_repair_or = #{record.hasNotRepairOr,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasRobberyOr != null" >
+        has_robbery_or = #{record.hasRobberyOr,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasFireSelfOr != null" >
+        has_fire_self_or = #{record.hasFireSelfOr,jdbcType=INTEGER},
+      </if>
+      <if test="record.hasWaterOr != null" >
+        has_water_or = #{record.hasWaterOr,jdbcType=INTEGER},
+      </if>
+      <if test="record.starttime != null" >
+        startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.channel != null" >
+        channel = #{record.channel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.insuranceNum != null" >
+        insurance_num = #{record.insuranceNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upSystem != null" >
+        up_system = #{record.upSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.text1 != null" >
+        text1 = #{record.text1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.text2 != null" >
+        text2 = #{record.text2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.text3 != null" >
+        text3 = #{record.text3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update car_related_info
+    set check_car_number = #{record.checkCarNumber,jdbcType=VARCHAR},
+      userid = #{record.userid,jdbcType=VARCHAR},
+      car_owner = #{record.carOwner,jdbcType=VARCHAR},
+      vin_number = #{record.vinNumber,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=VARCHAR},
+      has_car_number_or = #{record.hasCarNumberOr,jdbcType=INTEGER},
+      branch = #{record.branch,jdbcType=VARCHAR},
+      employee_photo = #{record.employeePhoto,jdbcType=VARCHAR},
+      employee_number = #{record.employeeNumber,jdbcType=VARCHAR},
+      has_scratch_or = #{record.hasScratchOr,jdbcType=INTEGER},
+      has_glass_or = #{record.hasGlassOr,jdbcType=INTEGER},
+      has_add_device_or = #{record.hasAddDeviceOr,jdbcType=INTEGER},
+      has_not_repair_or = #{record.hasNotRepairOr,jdbcType=INTEGER},
+      has_robbery_or = #{record.hasRobberyOr,jdbcType=INTEGER},
+      has_fire_self_or = #{record.hasFireSelfOr,jdbcType=INTEGER},
+      has_water_or = #{record.hasWaterOr,jdbcType=INTEGER},
+      startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      channel = #{record.channel,jdbcType=VARCHAR},
+      insurance_num = #{record.insuranceNum,jdbcType=VARCHAR},
+      up_system = #{record.upSystem,jdbcType=VARCHAR},
+      text1 = #{record.text1,jdbcType=VARCHAR},
+      text2 = #{record.text2,jdbcType=VARCHAR},
+      text3 = #{record.text3,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.practise.entity.CarRelatedInfo" >
+    update car_related_info
+    <set >
+      <if test="userid != null" >
+        userid = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="carOwner != null" >
+        car_owner = #{carOwner,jdbcType=VARCHAR},
+      </if>
+      <if test="vinNumber != null" >
+        vin_number = #{vinNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="hasCarNumberOr != null" >
+        has_car_number_or = #{hasCarNumberOr,jdbcType=INTEGER},
+      </if>
+      <if test="branch != null" >
+        branch = #{branch,jdbcType=VARCHAR},
+      </if>
+      <if test="employeePhoto != null" >
+        employee_photo = #{employeePhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNumber != null" >
+        employee_number = #{employeeNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="hasScratchOr != null" >
+        has_scratch_or = #{hasScratchOr,jdbcType=INTEGER},
+      </if>
+      <if test="hasGlassOr != null" >
+        has_glass_or = #{hasGlassOr,jdbcType=INTEGER},
+      </if>
+      <if test="hasAddDeviceOr != null" >
+        has_add_device_or = #{hasAddDeviceOr,jdbcType=INTEGER},
+      </if>
+      <if test="hasNotRepairOr != null" >
+        has_not_repair_or = #{hasNotRepairOr,jdbcType=INTEGER},
+      </if>
+      <if test="hasRobberyOr != null" >
+        has_robbery_or = #{hasRobberyOr,jdbcType=INTEGER},
+      </if>
+      <if test="hasFireSelfOr != null" >
+        has_fire_self_or = #{hasFireSelfOr,jdbcType=INTEGER},
+      </if>
+      <if test="hasWaterOr != null" >
+        has_water_or = #{hasWaterOr,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null" >
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="channel != null" >
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="insuranceNum != null" >
+        insurance_num = #{insuranceNum,jdbcType=VARCHAR},
+      </if>
+      <if test="upSystem != null" >
+        up_system = #{upSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        text1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        text2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        text3 = #{text3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where check_car_number = #{checkCarNumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.practise.entity.CarRelatedInfo" >
+    update car_related_info
+    set userid = #{userid,jdbcType=VARCHAR},
+      car_owner = #{carOwner,jdbcType=VARCHAR},
+      vin_number = #{vinNumber,jdbcType=VARCHAR},
+      number = #{number,jdbcType=VARCHAR},
+      has_car_number_or = #{hasCarNumberOr,jdbcType=INTEGER},
+      branch = #{branch,jdbcType=VARCHAR},
+      employee_photo = #{employeePhoto,jdbcType=VARCHAR},
+      employee_number = #{employeeNumber,jdbcType=VARCHAR},
+      has_scratch_or = #{hasScratchOr,jdbcType=INTEGER},
+      has_glass_or = #{hasGlassOr,jdbcType=INTEGER},
+      has_add_device_or = #{hasAddDeviceOr,jdbcType=INTEGER},
+      has_not_repair_or = #{hasNotRepairOr,jdbcType=INTEGER},
+      has_robbery_or = #{hasRobberyOr,jdbcType=INTEGER},
+      has_fire_self_or = #{hasFireSelfOr,jdbcType=INTEGER},
+      has_water_or = #{hasWaterOr,jdbcType=INTEGER},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      channel = #{channel,jdbcType=VARCHAR},
+      insurance_num = #{insuranceNum,jdbcType=VARCHAR},
+      up_system = #{upSystem,jdbcType=VARCHAR},
+      text1 = #{text1,jdbcType=VARCHAR},
+      text2 = #{text2,jdbcType=VARCHAR},
+      text3 = #{text3,jdbcType=VARCHAR}
+    where check_car_number = #{checkCarNumber,jdbcType=VARCHAR}
+  </update>
+</mapper>
