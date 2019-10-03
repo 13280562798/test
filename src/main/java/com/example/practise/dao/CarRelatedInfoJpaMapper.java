@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CarRelatedInfoJpaMapper extends JpaRepository<CarRelatedInfoEntity,String> {
-//    Page<CarRelatedInfoEntity> findAll(int i, int i1);alksjdf
+//    Page<CarRelatedInfoEntity> findAll(int i, int i1);alksjdfdklsajf;lsjf;lasfjkl
 }
